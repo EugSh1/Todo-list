@@ -152,7 +152,7 @@ input {
     margin-bottom: 10px;
 }
 
-@media only screen and (min-width: 769px) {
+@media (width >= 769px) {
     .app {
         min-width: 324px;
         max-width: 400px;
