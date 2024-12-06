@@ -7,11 +7,7 @@ export default function Task({ task, onTaskMark, onTaskDelete }) {
                 <button
                     className="button-mark"
                     onClick={onTaskMark}
-                    title={
-                        task.isDone
-                            ? "Mark as uncompleted"
-                            : "Mark as completed"
-                    }
+                    title={task.isDone ? "Mark as uncompleted" : "Mark as completed"}
                 >
                     {task.isDone ? <CircleCheckBig /> : <Circle />}
                 </button>
@@ -20,11 +16,7 @@ export default function Task({ task, onTaskMark, onTaskDelete }) {
             </div>
 
             <div>
-                <button
-                    className="button-action"
-                    onClick={onTaskDelete}
-                    title="Delete task"
-                >
+                <button className="button-action" onClick={onTaskDelete} title="Delete task">
                     <Trash2 />
                 </button>
             </div>

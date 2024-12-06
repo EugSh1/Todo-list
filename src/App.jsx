@@ -1,26 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Task from "./components/Task";
 import { Plus } from "lucide-react";
-import {
-    getTasksFromLocalStorage,
-    saveUpdatedTasksToLocalStorage,
-    markTask,
-    deleteTask
-} from "./utils.js";
+import useTasks from "./useTasks.js";
 
 export default function App() {
-    const [tasks, setTasks] = useState(getTasksFromLocalStorage());
+    const { tasks, addTask, markTask, deleteTask } = useTasks();
     const [newTaskInputVisible, setNewTaskInputVisible] = useState(false);
 
-    useEffect(() => {
-        setTasks(getTasksFromLocalStorage());
-    }, []);
-
-    useEffect(() => {
-        saveUpdatedTasksToLocalStorage(tasks);
-    }, [tasks]);
-
-    function addTask(event) {
+    function handleAddTask(event) {
         if (event.key === "Enter") {
             const newTaskName = event.target.value.trim();
 
@@ -29,23 +16,13 @@ export default function App() {
                 return;
             }
 
-            const newTask = { taskName: newTaskName, isDone: false };
-            const updatedTasks = [...tasks, newTask];
-            setTasks(updatedTasks);
+            addTask(newTaskName);
             event.target.value = "";
             setNewTaskInputVisible(false);
         }
     }
 
-    function handleMarkTask(task) {
-        const updatedTasks = markTask(task);
-        setTasks(updatedTasks);
-    }
-
-    function handleDeleteTask(task) {
-        const updatedTasks = deleteTask(task);
-        setTasks(updatedTasks);
-    }
+    const sortedTasks = [...tasks].sort((a, b) => a.isDone - b.isDone);
 
     return (
         <>
@@ -57,17 +34,17 @@ export default function App() {
                         placeholder="Enter new task"
                         autoFocus
                         onBlur={() => setNewTaskInputVisible(false)}
-                        onKeyDown={addTask}
+                        onKeyDown={handleAddTask}
                     />
                 )}
 
                 <div className="tasks-container">
-                    {tasks.map((task, index) => (
+                    {sortedTasks.map((task) => (
                         <Task
-                            key={index}
+                            key={task.id}
                             task={task}
-                            onTaskMark={() => handleMarkTask(task)}
-                            onTaskDelete={() => handleDeleteTask(task)}
+                            onTaskMark={() => markTask(task.id)}
+                            onTaskDelete={() => deleteTask(task.id)}
                         />
                     ))}
                 </div>
@@ -81,10 +58,7 @@ export default function App() {
                 )}
             </div>
 
-            <button
-                className="button-new-task"
-                onClick={() => setNewTaskInputVisible(true)}
-            >
+            <button className="button-new-task" onClick={() => setNewTaskInputVisible(true)}>
                 <Plus />
             </button>
         </>
