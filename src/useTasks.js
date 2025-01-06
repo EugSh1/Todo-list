@@ -17,13 +17,7 @@ export default function useTasks() {
     }
 
     function markTask(taskId) {
-        const tasksCopy = [...tasks];
-        const selectedTask = tasksCopy.find((task) => task.id === taskId);
-
-        if (!selectedTask) return;
-
-        selectedTask.isDone = !selectedTask.isDone;
-        setTasks(tasksCopy);
+        setTasks(tasks.map((task) => (task.id === taskId ? { ...task, isDone: !task.isDone } : task)));
     }
 
     function deleteTask(taskId) {
