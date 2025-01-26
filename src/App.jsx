@@ -69,7 +69,7 @@ export default function App() {
                     className="p-2 bg-zinc-300 dark:bg-zinc-700 border border-zinc-400 dark:border-zinc-600 rounded-full fixed bottom-2 right-2 transition-all hover:brightness-105 active:brightness-110"
                     onClick={() => setNewTaskInputVisible(true)}
                 >
-                    <Plus className="text-zinc-600 dark:text-zinc-300" />
+                    <Plus className="text-zinc-600 dark:text-zinc-300" aria-label="Add new task" />
                 </button>
             </div>
         </>

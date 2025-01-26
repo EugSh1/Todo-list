@@ -7,7 +7,12 @@ export default function Task({ task, onTaskMark, onTaskDelete }) {
                 <button
                     className="flex justify-center items-center"
                     onClick={onTaskMark}
-                    title={task.isDone ? "Mark as uncompleted" : "Mark as completed"}
+                    title={task.isDone ? "Mark the task as incomplete" : "Mark the task as completed"}
+                    aria-label={
+                        task.isDone
+                            ? `Mark the "${task.taskName}" task as incomplete`
+                            : `Mark the "${task.taskName}" task as completed`
+                    }
                 >
                     {task.isDone ? (
                         <CircleCheckBig className="text-zinc-800 dark:text-zinc-300" />
@@ -16,19 +21,20 @@ export default function Task({ task, onTaskMark, onTaskDelete }) {
                     )}
                 </button>
 
-                <h3
+                <p
                     className={`${
                         task.isDone ? "line-through" : ""
                     } text-zinc-700 dark:text-zinc-200 text-lg break-all`}
                 >
                     {task.taskName}
-                </h3>
+                </p>
             </div>
 
             <button
-                className="bg-zinc-400 dark:bg-zinc-600 p-2 rounded md:invisible group-hover:visible"
+                className="bg-zinc-400 dark:bg-zinc-600 p-2 rounded md:invisible group-hover:visible group-focus-within:visible"
                 onClick={onTaskDelete}
                 title="Delete task"
+                aria-label={`Delete the \"${task.taskName}\" task`}
             >
                 <Trash2 className="text-zinc-800 dark:text-zinc-300" />
             </button>
