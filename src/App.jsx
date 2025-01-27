@@ -29,13 +29,13 @@ export default function App() {
     return (
         <>
             <div className="p-2 flex flex-col justify-center items-center h-screen bg-zinc-200 dark:bg-zinc-800">
-                <div className="sm:p-2 sm:border border-zinc-100 dark:border-zinc-700 rounded shadow-md w-full h-full sm:w-[25%] sm:h-auto overflow-auto">
+                <div className="sm:p-2 sm:border border-zinc-100 dark:border-zinc-700 rounded-sm shadow-md w-full h-full sm:w-[25%] sm:h-auto overflow-auto">
                     <h1 className="text-3xl font-bold text-zinc-950 dark:text-zinc-50 mb-1">To do</h1>
 
                     <div className="flex flex-col gap-1">
                         {newTaskInputVisible && (
                             <input
-                                className="p-1 bg-zinc-300 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 text-lg rounded w-full focus-visible:outline outline-sky-400"
+                                className="p-1 bg-zinc-300 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 text-lg rounded-sm w-full focus-visible:outline outline-sky-400"
                                 type="text"
                                 placeholder="Enter new task"
                                 autoFocus
@@ -66,7 +66,7 @@ export default function App() {
                 </div>
 
                 <button
-                    className="p-2 bg-zinc-300 dark:bg-zinc-700 border border-zinc-400 dark:border-zinc-600 rounded-full fixed bottom-2 right-2 transition-all hover:brightness-105 active:brightness-110"
+                    className="p-2 bg-zinc-300 dark:bg-zinc-700 border border-zinc-400 dark:border-zinc-600 rounded-full fixed bottom-2 right-2 transition-all hover:brightness-105 active:brightness-110 cursor-pointer"
                     onClick={() => setNewTaskInputVisible(true)}
                 >
                     <Plus className="text-zinc-600 dark:text-zinc-300" aria-label="Add new task" />
