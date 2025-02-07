@@ -13,15 +13,17 @@ export default function useTasks() {
 
     function addTask(taskName) {
         const newTask = { taskName, id: Date.now(), isDone: false };
-        setTasks([...tasks, newTask]);
+        setTasks((prevTasks) => [...prevTasks, newTask]);
     }
 
     function markTask(taskId) {
-        setTasks(tasks.map((task) => (task.id === taskId ? { ...task, isDone: !task.isDone } : task)));
+        setTasks((prevTasks) =>
+            prevTasks.map((task) => (task.id === taskId ? { ...task, isDone: !task.isDone } : task))
+        );
     }
 
     function deleteTask(taskId) {
-        setTasks(tasks.filter((task) => task.id !== taskId));
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
     }
 
     return { tasks, addTask, markTask, deleteTask };
